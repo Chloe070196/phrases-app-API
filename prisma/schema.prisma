@@ -17,7 +17,16 @@ model User {
   id              Int           @id @default(autoincrement())
   username        String          
   password        String
-  email           String               
+  email           String        
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+}
+
+model Phrase {
+  id            Int           @id @default(autoincrement())
+  content       String        @unique
+  meaning       String
+  example       String? 
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
