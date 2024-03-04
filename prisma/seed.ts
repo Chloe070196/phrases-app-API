@@ -1,21 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-type UserInputType = {
-  email: string;
-  username: string;
-  password: string;
-};
-
-type PhraseInputType = {
-  content: string;
-  meaning: string;
-  example: string;
-};
-
 async function main() {
-  const user1: UserInputType = {
+  const user1: Prisma.UserCreateInput = {
     email: 'max@test.com',
     username: 'max123',
     password: 'MostInnovativeAndConvolutedPassword',
@@ -24,7 +12,7 @@ async function main() {
   const max = await prisma.user.create({ data: user1 });
   console.log('user created:', max);
 
-  const phrase1: PhraseInputType = {
+  const phrase1: Prisma.PhraseCreateInput = {
     content: 'until the cows come home',
     meaning: 'for a very long time',
     example:
@@ -32,6 +20,20 @@ async function main() {
   };
   const untilTheCowsComeHome = await prisma.phrase.create({ data: phrase1 });
   console.log('phrase created:', untilTheCowsComeHome);
+
+  const userPhrase1: Prisma.UserPhraseCreateInput = {
+    phrase: { connect: { id: 1 } },
+    user: { connect: { id: 1 } },
+    status: 'WIP',
+    timesAttempted: 2,
+    timesSeen: 2,
+    timesUsed: 0,
+  };
+
+  const MaxUntilTheCowsComeHome = await prisma.userPhrase.create({
+    data: userPhrase1,
+  });
+  console.log('userphrase created: ', MaxUntilTheCowsComeHome);
 }
 
 main();
