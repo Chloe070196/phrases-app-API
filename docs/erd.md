@@ -37,6 +37,7 @@ erDiagram
  }
  PHRASE {
     integer         id              PK
+    string          title
     string          content
     string          meaning
     string          example
