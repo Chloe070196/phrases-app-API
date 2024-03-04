@@ -34,6 +34,21 @@ async function main() {
     data: userPhrase1,
   });
   console.log('userphrase created: ', MaxUntilTheCowsComeHome);
+
+  const text1: Prisma.TextCreateInput = {
+    title: 'Something attention-catching',
+    content:
+      'Some quick anecdote about a holiday where stuff went wrong and then <insert newly learnt phrase> had to wait until the cows come home.',
+    user: { connect: { id: 1 } },
+    userPhrases: {
+      connect: [{ id: 1 }],
+    },
+  };
+
+  const firstText = await prisma.text.create({
+    data: text1,
+  });
+  console.log('text created: ', firstText);
 }
 
 main();
