@@ -7,24 +7,64 @@
 - User
 - Phrase (as obtained from STANDS4 Phrases API)
 - UserPhrase (extends Phrase)
-- IncorrectAlternatives (extends Phrase)
 - UserText
 
 ### additional features
 
 - LearningSession
 - PracticeScore
+- IncorrectAlternatives (instead of just showing random unrelated phrases as alternative MCQ choices, have an array of these for each phrase that are determined in advance, and that aim to make the user think)
 
- <!-- TODO: create ERD -->
+ <!-- TODO: check / update -->
 
  ```mermaid
 
 erDiagram
 
- USER {}
- PHRASE {}
- USERPHRASE {}
- INCORRECTALTERNATIVE {}
- USERTEXT {}
+ PHRASE ||--o{ USERPHRASE : can_have
+ USER ||--o{ USERPHRASE : can_have
+ USER ||--o{ USERTEXT : can_have
+
+ USER {
+    integer         id              PK
+    string          username
+    string          hashedPassword
+    array           userPhrases   
+    array           texts
+    datetime        createdAt
+    datetime        updatedAt 
+ }
+ PHRASE {
+    integer         id              PK
+    string          phrase
+    string          meaning
+    string          example
+    array           userPhrases 
+    datetime        createdAt
+    datetime        updatedAt 
+ }
+ USERPHRASE {
+    integer     id              PK
+    Phrase      phrase
+    phraseId    id              FK
+    User        user            
+    userId      id              FK
+    string      status
+    int         timesAttempted
+    int         timesSeen
+    int         timesUsed
+    datetime    createdAt
+    datetime    updatedAt 
+ }
+ TEXT {
+    integer     id              PK
+    string      content 
+    User        user            
+    userId      id              FK   
+    string      textType    
+    array       phrasesUsed        
+    datetime    createdAt
+    datetime    updatedAt 
+ }
 
  ```
