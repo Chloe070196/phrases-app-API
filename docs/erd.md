@@ -27,8 +27,9 @@ erDiagram
 
  USER {
     integer         id              PK
+    string          email           
     string          username
-    string          hashedPassword
+    string          password
     array           userPhrases   
     array           texts
     datetime        createdAt
@@ -36,7 +37,7 @@ erDiagram
  }
  PHRASE {
     integer         id              PK
-    string          phrase
+    string          content
     string          meaning
     string          example
     array           userPhrases 
