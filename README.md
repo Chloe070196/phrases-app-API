@@ -30,3 +30,4 @@
 
 ## Database ERD
 <!-- TODO: add link to ERD file-->
+This project uses a relational database following [these specifications](docs/erd.md).
