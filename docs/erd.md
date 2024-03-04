@@ -23,7 +23,7 @@ erDiagram
 
  PHRASE ||--o{ USERPHRASE : can_have
  USER ||--o{ USERPHRASE : can_have
- USER ||--o{ USERTEXT : can_have
+ USER ||--o{ TEXT : can_have
 
  USER {
     integer         id              PK
