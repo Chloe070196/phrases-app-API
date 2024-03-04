@@ -7,7 +7,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Learn phrases API')
     .setDescription(
-      'An api for English learners (intermediate and up) to access resources, store their work, and access and store their progress'
+      'An api for English learners (intermediate and up) to access resources, store their work, and access and store their progress',
     )
     .setVersion('1.0')
     .addTag('phrases')
