@@ -1,4 +1,4 @@
-import { Controller, HttpStatus, HttpCode, Put, Body } from '@nestjs/common';
+import { Controller, HttpStatus, HttpCode, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UsersService } from 'src/users/users.service';
 
@@ -7,7 +7,7 @@ export class AuthController {
   constructor(private usersService: UsersService) {}
 
   @HttpCode(HttpStatus.OK)
-  @Put('register')
+  @Post('register')
   async register(
     @Body()
     createUserDto: {
