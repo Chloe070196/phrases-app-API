@@ -1,7 +1,27 @@
-import { Controller } from '@nestjs/common';
+import { Controller, HttpStatus, HttpCode, Put, Body } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { UsersService } from 'src/users/users.service';
 
-@Controller('auth')
-export class AuthController {}
+@Controller()
+export class AuthController {
+  constructor(private usersService: UsersService) {}
 
-// TODO: add register route
+  @HttpCode(HttpStatus.OK)
+  @Put('register')
+  async register(
+    @Body()
+    createUserDto: {
+      username: string;
+      password: string;
+      email: string;
+    },
+  ) {
+    await this.usersService.createUser({
+      ...createUserDto,
+      password: await AuthService.hashPassword(createUserDto.password),
+    });
+    return `created user with username: ${createUserDto.username}`;
+  }
+}
+
 // TODO: add login route
