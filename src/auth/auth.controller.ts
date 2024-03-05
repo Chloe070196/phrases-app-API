@@ -4,7 +4,10 @@ import { UsersService } from 'src/users/users.service';
 
 @Controller()
 export class AuthController {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService,
+  ) {}
 
   @HttpCode(HttpStatus.OK)
   @Post('register')
@@ -22,6 +25,28 @@ export class AuthController {
     });
     return `created user with username: ${createUserDto.username}`;
   }
-}
 
-// TODO: add login route
+  @HttpCode(HttpStatus.OK)
+  @Post('login')
+  async login(
+    @Body()
+    loginDto: {
+      email: string;
+      password: string;
+    },
+  ) {
+    const secret = process.env.JWT_SECRET;
+    if (secret) {
+      try {
+        const jwt = await this.authService.logIn(
+          loginDto.email,
+          loginDto.password,
+          secret,
+        );
+        return jwt;
+      } catch (e) {
+        console.error('error log in user: ', e);
+      }
+    }
+  }
+}
