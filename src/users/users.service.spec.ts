@@ -27,13 +27,35 @@ describe('UsersService', () => {
       prismaService.user.findUnique = jest.fn().mockReturnValueOnce({
         username: 'joe123',
         password: 'segboerg',
-        email: 'mock@email.com',
+        email: 'mock@email1.com',
       });
-      const email = 'mock@email.com';
+      const email = 'mock@email1.com';
 
       const result = await service.getUserBy({ email });
       expect(result).not.toBeUndefined();
       expect(result?.username).toEqual('joe123');
+    });
+  });
+  describe('create', () => {
+    it('a new user and return their username', async () => {
+      prismaService.user.create = jest.fn().mockReturnValueOnce({
+        id: 7,
+        username: 'lee765',
+        password: 'lsthg',
+        email: 'mock@email2.com',
+        createdAt: 'some time',
+        updatedAt: 'some time',
+      });
+      const data = {
+        username: 'mock@email2.com',
+        password: 'lsthg',
+        email: 'mock@email2.com',
+      };
+
+      const result = await service.createUser(data);
+      expect(result).not.toBeUndefined();
+      expect(result?.username).toEqual('lee765');
+      expect(result?.id).toEqual(7);
     });
   });
 });
