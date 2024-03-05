@@ -23,5 +23,3 @@ export class UsersService {
     return this.prisma.user.create({ data: UserCreateInput });
   }
 }
-
-// TODO: add createUser
