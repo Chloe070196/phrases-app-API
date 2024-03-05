@@ -19,11 +19,14 @@ export class AuthController {
       email: string;
     },
   ) {
-    await this.usersService.createUser({
+    const user = await this.usersService.createUser({
       ...createUserDto,
       password: await AuthService.hashPassword(createUserDto.password),
     });
-    return `created user with username: ${createUserDto.username}`;
+    return {
+      message: `successfully created user: ${user?.username},`,
+      user: { username: user?.username },
+    };
   }
 
   @HttpCode(HttpStatus.OK)
@@ -43,9 +46,9 @@ export class AuthController {
           loginDto.password,
           secret,
         );
-        return jwt;
+        return { data: { jwt: jwt } };
       } catch (e) {
-        console.error('error log in user: ', e);
+        console.error('error loggin in user: ', e);
       }
     }
   }
