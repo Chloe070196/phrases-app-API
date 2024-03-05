@@ -1,14 +1,18 @@
 import { PrismaClient, Prisma } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
 async function main() {
+  const hashedPassword = await bcrypt.hash(
+    'MostInnovativeAndConvolutedPassword',
+    8,
+  );
   const user1: Prisma.UserCreateInput = {
     email: 'max@test.com',
     username: 'max123',
-    password: 'MostInnovativeAndConvolutedPassword',
+    password: hashedPassword,
   };
-
   const max = await prisma.user.create({ data: user1 });
   console.log('user created:', max);
 
