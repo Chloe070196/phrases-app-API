@@ -38,11 +38,10 @@ describe('PhrasesController', () => {
       prismaService.phrase.create = jest
         .fn()
         .mockReturnValueOnce(mockPhraseReturned);
-      const result = await phraseService.save(mockPhraseInput);
+      const result = await controller.save(mockPhraseInput);
       expect(result).not.toBeUndefined();
-      expect(result.status).toEqual(201);
-      expect(result.data.content).toHaveProperty('id');
-      expect(result.data.content).toEqual('time flies');
+      expect(result.content).toHaveProperty('id');
+      expect(result.content).toEqual('time flies');
     });
   });
   describe(': getMany ', () => {
@@ -50,12 +49,11 @@ describe('PhrasesController', () => {
       prismaService.phrase.findMany = jest
         .fn()
         .mockReturnValueOnce([mockPhraseReturned]);
-      const result = await phraseService.getMany(mockPhraseInput);
+      const result = await controller.getMany(mockPhraseInput);
       expect(result).not.toBeUndefined();
-      expect(result.status).toEqual(200);
-      expect(result.data[0]).not.toBeUndefined();
-      expect(result.data[0].content).toEqual('timeFlies');
-      expect(result.data[0].content).toHaveProperty('id');
+      expect(result[0]).not.toBeUndefined();
+      expect(result[0].content).toEqual('timeFlies');
+      expect(result[0].content).toHaveProperty('id');
     });
   });
 });
