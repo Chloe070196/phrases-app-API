@@ -7,6 +7,18 @@ describe('PhrasesController', () => {
   let controller: PhrasesController;
   let prismaService: PrismaService;
   let phraseService: PhrasesService;
+  const mockPhraseInput = {
+    content: 'time flies',
+    meaning: 'time seems to pass so quickly that we do not notice it',
+    example:
+      "Wow, it's already midnight! Time flies by when you're having fun.",
+  };
+  const mockPhraseReturned = {
+    ...mockPhraseInput,
+    id: 1,
+    createAt: 'some time',
+    updatedAt: 'some time',
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -21,30 +33,29 @@ describe('PhrasesController', () => {
     expect(controller).toBeDefined();
   });
 
-  describe(': save', () => {
+  describe(': save ', () => {
     it('should save a phrase and return it', async () => {
-      const mockPhraseInput = {
-        content: 'time flies',
-        meaning: 'time seems to pass so quickly that we do not notice it',
-        example:
-          "Wow, it's already midnight! Time flies by when you're having fun.",
-      };
-      const mockPhraseReturned = {
-        ...mockPhraseInput,
-        id: 1,
-        createAt: 'some time',
-        updatedAt: 'some time',
-      };
       prismaService.phrase.create = jest
         .fn()
         .mockReturnValueOnce(mockPhraseReturned);
       const result = await phraseService.save(mockPhraseInput);
       expect(result).not.toBeUndefined();
       expect(result.status).toEqual(201);
+      expect(result.data.content).toHaveProperty('id');
       expect(result.data.content).toEqual('time flies');
     });
   });
-  describe(': getPhrases', () => {
-    it('should return a list of phrases', () => {});
+  describe(': getMany ', () => {
+    it('should return a list of phrases', async () => {
+      prismaService.phrase.findMany = jest
+        .fn()
+        .mockReturnValueOnce([mockPhraseReturned]);
+      const result = await phraseService.getMany(mockPhraseInput);
+      expect(result).not.toBeUndefined();
+      expect(result.status).toEqual(200);
+      expect(result.data[0]).not.toBeUndefined();
+      expect(result.data[0].content).toEqual('timeFlies');
+      expect(result.data[0].content).toHaveProperty('id');
+    });
   });
 });
