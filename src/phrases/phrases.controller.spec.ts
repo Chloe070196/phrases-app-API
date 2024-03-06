@@ -6,7 +6,7 @@ import { PhrasesService } from './phrases.service';
 describe('PhrasesController', () => {
   let controller: PhrasesController;
   let prismaService: PrismaService;
-  let phraseService: PhrasesService;
+
   const mockPhraseInput = {
     content: 'time flies',
     meaning: 'time seems to pass so quickly that we do not notice it',
@@ -27,6 +27,7 @@ describe('PhrasesController', () => {
     }).compile();
 
     controller = module.get<PhrasesController>(PhrasesController);
+    prismaService = module.get<PrismaService>(PrismaService);
   });
 
   it('should be defined', () => {
@@ -40,7 +41,7 @@ describe('PhrasesController', () => {
         .mockReturnValueOnce(mockPhraseReturned);
       const result = await controller.save(mockPhraseInput);
       expect(result).not.toBeUndefined();
-      expect(result.content).toHaveProperty('id');
+      expect(result).toHaveProperty('id');
       expect(result.content).toEqual('time flies');
     });
   });
@@ -49,11 +50,11 @@ describe('PhrasesController', () => {
       prismaService.phrase.findMany = jest
         .fn()
         .mockReturnValueOnce([mockPhraseReturned]);
-      const result = await controller.getMany(mockPhraseInput);
+      const result = await controller.getMany();
       expect(result).not.toBeUndefined();
       expect(result[0]).not.toBeUndefined();
-      expect(result[0].content).toEqual('timeFlies');
-      expect(result[0].content).toHaveProperty('id');
+      expect(result[0].content).toEqual('time flies');
+      expect(result[0]).toHaveProperty('id');
     });
   });
 });
