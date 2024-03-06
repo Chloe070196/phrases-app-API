@@ -1,4 +1,11 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { PhrasesService } from './phrases.service';
 
 @Controller('phrases')
@@ -16,5 +23,11 @@ export class PhrasesController {
     },
   ) {
     return await this.phrasesService.create(createPhraseDto);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Get('/')
+  async getMany() {
+    return await this.phrasesService.findMany();
   }
 }
