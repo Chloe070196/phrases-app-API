@@ -9,4 +9,8 @@ export class PhrasesService {
   async create(phrase: Prisma.PhraseCreateInput) {
     return await this.prismaService.phrase.create({ data: phrase });
   }
+
+  async findMany() {
+    return await this.prismaService.phrase.findMany();
+  }
 }
