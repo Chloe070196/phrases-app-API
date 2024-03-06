@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { PrismaService } from 'src/prisma.service';
 import { AuthService } from 'src/auth/auth.service';
 import { AuthController } from 'src/auth/auth.controller';
+import * as bcrypt from 'bcrypt';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -41,7 +42,9 @@ describe('UsersService', () => {
       prismaService.user.create = jest.fn().mockReturnValueOnce({
         id: 7,
         username: 'lee765',
-        password: 'lsthg',
+        // uses the hash value of a random mock password, not just a random string
+        password:
+          '$2b$08$jkrHXKQzLOtF2bkBsa6bReoc2yk3qi0SRhv75d.CUbbYibeLiiYde',
         email: 'mock@email2.com',
         createdAt: 'some time',
         updatedAt: 'some time',
