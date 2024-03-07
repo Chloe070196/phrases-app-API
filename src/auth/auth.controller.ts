@@ -1,6 +1,7 @@
-import { Controller, HttpStatus, HttpCode, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UsersService } from 'src/users/users.service';
+import { Response } from 'express';
 
 @Controller()
 export class AuthController {
@@ -9,7 +10,6 @@ export class AuthController {
     private authService: AuthService,
   ) {}
 
-  @HttpCode(HttpStatus.OK)
   @Post('register')
   async register(
     @Body()
@@ -18,18 +18,16 @@ export class AuthController {
       password: string;
       email: string;
     },
+    @Res() res: Response,
   ) {
-    const user = await this.usersService.createUser({
+    const response = await this.usersService.createUser({
       ...createUserDto,
       password: await AuthService.hashPassword(createUserDto.password),
     });
-    return {
-      message: `successfully created user: ${user?.username},`,
-      user: { username: user?.username },
-    };
+    const newUser = { username: response?.username };
+    return res.json(newUser);
   }
 
-  @HttpCode(HttpStatus.OK)
   @Post('login')
   async login(
     @Body()
@@ -37,6 +35,7 @@ export class AuthController {
       email: string;
       password: string;
     },
+    @Res() res: Response,
   ) {
     const secret = process.env.JWT_SECRET;
     if (secret) {
@@ -46,7 +45,7 @@ export class AuthController {
           loginDto.password,
           secret,
         );
-        return { data: { jwt: jwt } };
+        res.json(jwt);
       } catch (e) {
         console.error('error loggin in user: ', e);
       }
