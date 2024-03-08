@@ -10,7 +10,11 @@ export class PhrasesService {
     return await this.prismaService.phrase.create({ data: phrase });
   }
 
-  async findMany() {
-    return await this.prismaService.phrase.findMany();
+  async findMany(pageNum: number = 0, phrasesNum: number = 6) {
+    const startAt = phrasesNum * pageNum;
+    return await this.prismaService.phrase.findMany({
+      take: phrasesNum,
+      skip: startAt,
+    });
   }
 }

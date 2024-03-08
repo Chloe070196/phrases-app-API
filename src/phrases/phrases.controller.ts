@@ -5,6 +5,7 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Query,
 } from '@nestjs/common';
 import { PhrasesService } from './phrases.service';
 
@@ -29,7 +30,14 @@ export class PhrasesController {
 
   @HttpCode(HttpStatus.OK)
   @Get('/')
-  async getMany() {
+  async getMany(@Query() params: { page_num: string; phrases_num: string }) {
+    const { page_num, phrases_num } = params;
+    if (page_num && phrases_num) {
+      return await this.phrasesService.findMany(
+        Number(page_num),
+        Number(phrases_num),
+      );
+    }
     return await this.phrasesService.findMany();
   }
 }
