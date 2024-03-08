@@ -17,9 +17,11 @@ export class PhrasesController {
   async save(
     @Body()
     createPhraseDto: {
+      category: string;
       content: string;
       meaning: string;
       example: string;
+      shortExample: string;
     },
   ) {
     return await this.phrasesService.create(createPhraseDto);

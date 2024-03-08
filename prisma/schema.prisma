@@ -26,9 +26,11 @@ model User {
 
 model Phrase {
   id            Int           @id @default(autoincrement())
+  category      String
   content       String        @unique
   meaning       String
-  example       String?
+  example       String
+  shortExample  String
   userPhrases   UserPhrase[] 
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt

@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from '@prisma/client';
+import { phrasesToBeAdded } from './mockPhrases';
 const prisma = new PrismaClient();
 
 async function main() {
@@ -10,14 +11,11 @@ async function main() {
   const max = await prisma.user.create({ data: user1 });
   console.log('user created:', max);
 
-  const phrase1: Prisma.PhraseCreateInput = {
-    content: 'until the cows come home',
-    meaning: 'for a very long time',
-    example:
-      "I can't stand here until the cows come home, it's way too cold for that. Hurry!",
+  const createPhrases = async () => {
+    return await prisma.phrase.createMany({ data: phrasesToBeAdded });
   };
-  const untilTheCowsComeHome = await prisma.phrase.create({ data: phrase1 });
-  console.log('phrase created:', untilTheCowsComeHome);
+  const phrases = await createPhrases();
+  console.log('phrases created:', phrases);
 
   const userPhrase1: Prisma.UserPhraseCreateInput = {
     phrase: { connect: { id: 1 } },
