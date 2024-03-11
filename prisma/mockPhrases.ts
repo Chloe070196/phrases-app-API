@@ -18,7 +18,7 @@ export const phrasesToBeAdded: Array<{
     content: 'Drop a dime',
     meaning: 'To inform or betray someone',
     example:
-      "I can't believe he dropped a dime on his own brother to avoid going to jail. Loyalty means nothing to him.",
+      "I can't believe he chose to drop a dime on his own brother to avoid going to jail. Loyalty means nothing to him.",
     shortExample: 'He dropped a dime on his friend to get out of trouble.',
   },
   {
@@ -57,14 +57,6 @@ export const phrasesToBeAdded: Array<{
   },
   {
     category: 'Everyday Conversations',
-    content: 'Take the cake',
-    meaning: 'To be the most remarkable or outstanding',
-    example:
-      'His performance at the talent show really took the cake. Everyone was talking about it for weeks.',
-    shortExample: 'Your excuse takes the cake.',
-  },
-  {
-    category: 'Everyday Conversations',
     content: 'Break the ice',
     meaning:
       'To initiate social interaction in a tense or unfamiliar situation',
@@ -85,7 +77,7 @@ export const phrasesToBeAdded: Array<{
     content: 'Beat around the bush',
     meaning: 'To avoid getting to the point',
     example:
-      "Instead of telling me directly that he didn't like my idea, he kept beating around the bush, making the conversation frustrating.",
+      "Instead of telling me directly that he doesn't like one of my ideas, he always beat around the bush, making the conversation frustrating.",
     shortExample:
       'Stop beating around the bush and tell me what you really think.',
   },
@@ -94,7 +86,7 @@ export const phrasesToBeAdded: Array<{
     content: 'Jump for joy',
     meaning: 'To be extremely happy or excited',
     example:
-      'When she received the acceptance letter from her dream university, she jumped for joy and called all her friends to share the good news.',
+      'If we receive acceptance letters from our dream universities, we will surely jump for joy and call our families to share the good news.',
     shortExample: 'He jumped for joy when he got the promotion.',
   },
   {
@@ -102,16 +94,8 @@ export const phrasesToBeAdded: Array<{
     content: 'Grin from ear to ear',
     meaning: 'To smile broadly',
     example:
-      'After receiving praise from her boss for her hard work, she grinned from ear to ear, feeling proud of herself.',
+      'After receiving praise from her boss for her hard work, I saw her grin from ear to ear, feeling proud of herself.',
     shortExample: 'She grinned from ear to ear when she heard the news.',
-  },
-  {
-    category: 'Expressing Emotions',
-    content: 'Shiver down my spine',
-    meaning: 'A feeling of fear or excitement',
-    example:
-      'As she entered the haunted house, she felt a shiver down her spine, anticipating the scares that awaited her inside.',
-    shortExample: 'I felt a shiver down my spine when I heard the footsteps.',
   },
   {
     category: 'Expressing Emotions',
@@ -119,7 +103,7 @@ export const phrasesToBeAdded: Array<{
     meaning:
       'To worry about something that has already happened and cannot be changed',
     example:
-      "Stop crying over spilled milk. We can't change the fact that we missed the train; let's focus on finding another way to get there.",
+      "Don't cry over spilled milk, there's no point. We can't change the fact that we missed the train; let's focus on finding another way to get there.",
     shortExample: "Don't cry over spilled milk; let's find a solution.",
   },
   {
@@ -161,7 +145,7 @@ export const phrasesToBeAdded: Array<{
     content: 'Rise through the ranks',
     meaning: 'To advance to higher positions within a company or organization',
     example:
-      'Through hard work and dedication, he rose through the ranks from an entry-level position to a senior management role.',
+      'Through hard work and dedication, they can all rise through the ranks from an entry-level position to a senior management role.',
     shortExample: 'She rose through the ranks quickly.',
   },
   {
@@ -203,7 +187,7 @@ export const phrasesToBeAdded: Array<{
     meaning:
       'To test a product or service before it is released to the public, typically involving a select group of users',
     example:
-      'They invited a group of beta testers to try out the new software and provide feedback before its official launch.',
+      'They invited a group of volunteers to participate in a beta test. They tried out the new software and provided feedback before its official launch.',
     shortExample: "They're beta testing the new app.",
   },
   {
