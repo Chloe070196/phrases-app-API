@@ -41,7 +41,7 @@ export class UserphrasesController {
   @HttpCode(HttpStatus.OK)
   @Get('/')
   async getMany(@Query() params?: { page_num: string; phrases_num: string }) {
-    if (!params) {
+    if (!params || (!params.page_num && !params.phrases_num)) {
       return await this.userphrasesService.findMany();
     }
     const { page_num, phrases_num } = params;

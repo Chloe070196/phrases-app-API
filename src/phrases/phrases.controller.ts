@@ -26,8 +26,10 @@ export class PhrasesController {
   @HttpCode(HttpStatus.OK)
   @Get('/')
   async getMany(@Query() params?: { page_num: string; phrases_num: string }) {
-    if (!params) {
-      return await this.phrasesService.findMany();
+    if (!params || (!params.page_num && !params.phrases_num)) {
+      const phrases = await this.phrasesService.findMany();
+      console.log(phrases);
+      return phrases;
     }
     const { page_num, phrases_num } = params;
     if (phrases_num && page_num) {
