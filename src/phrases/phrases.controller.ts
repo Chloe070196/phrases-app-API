@@ -8,6 +8,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { PhrasesService } from './phrases.service';
+import { Prisma } from '@prisma/client';
 
 @Controller('phrases')
 export class PhrasesController {
@@ -17,27 +18,29 @@ export class PhrasesController {
   @Post('/')
   async save(
     @Body()
-    createPhraseDto: {
-      category: string;
-      content: string;
-      meaning: string;
-      example: string;
-      shortExample: string;
-    },
+    createPhraseDto: Prisma.PhraseCreateInput,
   ) {
     return await this.phrasesService.create(createPhraseDto);
   }
 
   @HttpCode(HttpStatus.OK)
   @Get('/')
-  async getMany(@Query() params: { page_num: string; phrases_num: string }) {
+  async getMany(@Query() params?: { page_num: string; phrases_num: string }) {
+    if (!params) {
+      return await this.phrasesService.findMany();
+    }
     const { page_num, phrases_num } = params;
-    if (page_num && phrases_num) {
+    if (phrases_num && page_num) {
       return await this.phrasesService.findMany(
         Number(page_num),
         Number(phrases_num),
       );
     }
-    return await this.phrasesService.findMany();
+    if (phrases_num) {
+      return await this.phrasesService.findMany(undefined, Number(phrases_num));
+    }
+    if (page_num) {
+      return await this.phrasesService.findMany(Number(page_num), undefined);
+    }
   }
 }
