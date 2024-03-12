@@ -25,9 +25,13 @@ describe('UsersService', () => {
   describe('getUserBy', () => {
     it('returns a user', async () => {
       prismaService.user.findUnique = jest.fn().mockReturnValueOnce({
+        id: 1,
         username: 'joe123',
-        password: 'segboerg',
+        password:
+          '$2b$08$jkrHXKQzLOtF2bkBsa6bReoc2yk3qi0SRhv75d.CUbbYibeLiiYde',
         email: 'mock@email1.com',
+        createdAt: 'some time',
+        updatedAt: 'some time',
       });
       const email = 'mock@email1.com';
 

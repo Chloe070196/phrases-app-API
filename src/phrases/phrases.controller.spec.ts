@@ -8,9 +8,12 @@ describe('PhrasesController', () => {
   let prismaService: PrismaService;
 
   const mockPhraseInput = {
+    category: 'making small talk',
     content: 'time flies',
     meaning: 'time seems to pass so quickly that we do not notice it',
     example:
+      "As I'm scrolling through my social media feed, time flies by faster than I realize. One moment, I'm checking out funny memes, and the next, it's already been an hour.",
+    shortExample:
       "Wow, it's already midnight! Time flies by when you're having fun.",
   };
   const mockPhraseReturned = {
@@ -52,9 +55,13 @@ describe('PhrasesController', () => {
         .mockReturnValueOnce([mockPhraseReturned]);
       const result = await controller.getMany();
       expect(result).not.toBeUndefined();
-      expect(result[0]).not.toBeUndefined();
-      expect(result[0].content).toEqual('time flies');
-      expect(result[0]).toHaveProperty('id');
+      if (result) {
+        expect(result[0]).not.toBeUndefined();
+        if (result[0]) {
+          expect(result[0].content).toEqual('time flies');
+          expect(result[0]).toHaveProperty('id');
+        }
+      }
     });
   });
 });
