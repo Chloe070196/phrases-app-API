@@ -22,6 +22,10 @@ describe('UserphrasesController', () => {
     createAt: 'some time',
     updatedAt: 'some time',
   };
+  const mockModifiedUserPhrase = {
+    ...mockUserPhraseReturned,
+    status: Status.LEARNT,
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -52,7 +56,7 @@ describe('UserphrasesController', () => {
     it('should return a list of userphrases', async () => {
       prismaService.userPhrase.findMany = jest
         .fn()
-        .mockReturnValueOnce([mockUserPhraseInput]);
+        .mockReturnValueOnce([mockUserPhraseReturned]);
       const result = await controller.getMany();
       expect(result).not.toBeUndefined();
       if (result) {
@@ -60,6 +64,18 @@ describe('UserphrasesController', () => {
         if (result) {
           expect(result[0].timesAttempted).toEqual(5);
         }
+      }
+    });
+  });
+  describe(': update ', () => {
+    it('should return an updated userphrase', async () => {
+      prismaService.userPhrase.findMany = jest
+        .fn()
+        .mockReturnValueOnce(mockModifiedUserPhrase);
+      const result = await controller.update({ status: Status.LEARNT }, '1');
+      expect(result).not.toBeUndefined();
+      if (result) {
+        expect(result.status).toEqual('LEARNT');
       }
     });
   });
