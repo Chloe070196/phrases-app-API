@@ -9,6 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import { UsersService } from 'src/users/users.service';
 import { Response } from 'express';
+import { Prisma } from '@prisma/client';
 
 @Controller()
 export class AuthController {
@@ -20,11 +21,7 @@ export class AuthController {
   @Post('register')
   async register(
     @Body()
-    createUserDto: {
-      username: string;
-      password: string;
-      email: string;
-    },
+    createUserDto: Prisma.UserCreateInput,
     @Res() res: Response,
   ) {
     const response = await this.usersService.createUser({
