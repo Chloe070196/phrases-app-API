@@ -10,11 +10,18 @@ export class PhrasesService {
     return await this.prismaService.phrase.create({ data: phrase });
   }
 
-  async findMany(pageNum: number = 0, phrasesNum: number = 6) {
+  async findMany(userId: number, pageNum: number = 0, phrasesNum: number = 6) {
     const startAt = phrasesNum * pageNum;
     return await this.prismaService.phrase.findMany({
       take: phrasesNum,
       skip: startAt,
+      where: {
+        userPhrases: {
+          none: {
+            userId: userId,
+          },
+        },
+      },
     });
   }
 }
