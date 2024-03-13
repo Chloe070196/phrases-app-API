@@ -21,8 +21,11 @@ export class AuthService {
     if (user) {
       const verified = await bcrypt.compare(password, user.password);
       if (verified) {
-        const token = jwt.sign(user.username, secret);
-        return { token, username: user?.username };
+        const token = jwt.sign(
+          { username: user.username, id: user.id },
+          secret,
+        );
+        return { token, username: user.username, id: user.id };
       }
     }
     throw new Error('unauthorised');
