@@ -64,4 +64,17 @@ describe('PhrasesController', () => {
       }
     });
   });
+  describe(': getAllCategories ', () => {
+    it('should return a list of distinct categories', async () => {
+      prismaService.phrase.findMany = jest
+        .fn()
+        .mockReturnValueOnce([
+          { category: 'Small talk' },
+          { category: 'Business Meetings' },
+        ]);
+      const result = await controller.getAllCategories();
+      expect(result).not.toBeUndefined();
+      expect(result.length).toEqual(2);
+    });
+  });
 });
