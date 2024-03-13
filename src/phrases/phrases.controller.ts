@@ -32,6 +32,12 @@ export class PhrasesController {
   }
 
   @HttpCode(HttpStatus.OK)
+  @Get('/categories')
+  async getAllCategories() {
+    return await this.phrasesService.findManyDistinctCategories();
+  }
+
+  @HttpCode(HttpStatus.OK)
   @Get('/')
   async getMany(
     @Query() params?: { page_num: string; phrases_num: string },

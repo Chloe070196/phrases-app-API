@@ -10,6 +10,15 @@ export class PhrasesService {
     return await this.prismaService.phrase.create({ data: phrase });
   }
 
+  async findManyDistinctCategories() {
+    return await this.prismaService.phrase.findMany({
+      distinct: ['category'],
+      select: {
+        category: true,
+      },
+    });
+  }
+
   async findMany(userId: number, pageNum: number = 0, phrasesNum: number = 6) {
     const startAt = phrasesNum * pageNum;
     return await this.prismaService.phrase.findMany({
