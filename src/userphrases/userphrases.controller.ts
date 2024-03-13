@@ -10,7 +10,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { UserphrasesService } from './userphrases.service';
-import { Prisma } from '@prisma/client';
+import { Prisma, Status } from '@prisma/client';
 
 @Controller('userphrases')
 export class UserphrasesController {
@@ -20,9 +20,25 @@ export class UserphrasesController {
   @Post('/')
   async save(
     @Body()
-    createUserphraseDto: Prisma.UserPhraseCreateInput,
+    data: {
+      timesSeen: number;
+      timesAttempted: number;
+      timesUsed: number;
+      status: Status;
+      userId: number;
+      phraseId: number;
+    },
   ) {
-    return await this.userphrasesService.create(createUserphraseDto);
+    const { timesSeen, timesAttempted, timesUsed, status, userId, phraseId } =
+      data;
+    return await this.userphrasesService.create(
+      timesSeen,
+      timesAttempted,
+      timesUsed,
+      status,
+      userId,
+      phraseId,
+    );
   }
 
   @HttpCode(HttpStatus.OK)
@@ -39,26 +55,32 @@ export class UserphrasesController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @Get('/')
-  async getMany(@Query() params?: { page_num: string; phrases_num: string }) {
+  @Get('/:userId')
+  async getMany(
+    @Param('userId') userId: string,
+    @Query() params?: { page_num: string; phrases_num: string },
+  ) {
     if (!params || (!params.page_num && !params.phrases_num)) {
-      return await this.userphrasesService.findMany();
+      return await this.userphrasesService.findMany(Number(userId));
     }
     const { page_num, phrases_num } = params;
     if (phrases_num && page_num) {
       return await this.userphrasesService.findMany(
+        Number(userId),
         Number(page_num),
         Number(phrases_num),
       );
     }
     if (phrases_num) {
       return await this.userphrasesService.findMany(
+        Number(userId),
         undefined,
         Number(phrases_num),
       );
     }
     if (page_num) {
       return await this.userphrasesService.findMany(
+        Number(userId),
         Number(page_num),
         undefined,
       );
