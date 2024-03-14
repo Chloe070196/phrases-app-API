@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { TextsService } from './texts.service';
 import { Prisma } from '@prisma/client';
 
@@ -27,6 +27,7 @@ export class TextsController {
     };
     return await this.textService.create(createTextDto);
   }
+  @Get()
   async getMany() {
     return await this.textService.getMany();
   }
