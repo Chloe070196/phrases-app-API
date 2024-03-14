@@ -9,18 +9,16 @@ export class TextsController {
   async save(
     @Body()
     fromClient: {
-      title: string;
       content: string;
-      userPhrasesId: Array<number>;
+      userphrasesId: Array<number>;
       userId: number;
     },
   ) {
     const createTextDto: Prisma.TextCreateInput = {
-      title: fromClient.title,
       content: fromClient.content,
       user: { connect: { id: Number(fromClient.userId) } },
       userPhrases: {
-        connect: fromClient.userPhrasesId.map((id) => ({
+        connect: fromClient.userphrasesId.map((id) => ({
           id,
         })),
       },

@@ -32,7 +32,6 @@ async function main() {
   console.log('userphrase created: ', MaxUntilTheCowsComeHome);
 
   const text1: Prisma.TextCreateInput = {
-    title: 'Something attention-catching',
     content:
       'Some quick anecdote about a holiday where stuff went wrong and then <insert newly learnt phrase> had to wait until the cows come home.',
     user: { connect: { id: 1 } },
