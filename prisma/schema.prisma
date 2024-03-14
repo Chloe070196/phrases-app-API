@@ -62,7 +62,7 @@ model Text {
   title         String          @unique
   content       String        
   user          User            @relation(fields:[userId], references:[id])             
-  userId        Int             @unique 
+  userId        Int             
   userPhrases   UserPhrase[]                    
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
