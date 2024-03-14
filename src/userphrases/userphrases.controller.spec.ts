@@ -9,8 +9,8 @@ describe('UserphrasesController', () => {
   let prismaService: PrismaService;
 
   const mockUserPhraseInput = {
-    phrase: { connect: { id: 1 } },
-    user: { connect: { id: 1 } },
+    phraseId: 1,
+    userId: 1,
     status: Status.WIP,
     timesAttempted: 5,
     timesSeen: 8,
@@ -57,7 +57,9 @@ describe('UserphrasesController', () => {
       prismaService.userPhrase.findMany = jest
         .fn()
         .mockReturnValueOnce([mockUserPhraseReturned]);
-      const result = await controller.getMany();
+      const result = await controller.getMany('1', {
+        category: 'Everyday Conversations',
+      });
       expect(result).not.toBeUndefined();
       if (result) {
         expect(result[0]).not.toBeUndefined();
