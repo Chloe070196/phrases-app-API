@@ -81,32 +81,12 @@ export class UserphrasesController {
   @Get('/:userId')
   async getMany(
     @Param('userId') userId: string,
-    @Query() params?: { page_num: string; phrases_num: string },
+    @Query()
+    params?: { category: string },
   ) {
-    if (!params || (!params.page_num && !params.phrases_num)) {
-      return await this.userphrasesService.findMany(Number(userId));
-    }
-    const { page_num, phrases_num } = params;
-    if (phrases_num && page_num) {
-      return await this.userphrasesService.findMany(
-        Number(userId),
-        Number(page_num),
-        Number(phrases_num),
-      );
-    }
-    if (phrases_num) {
-      return await this.userphrasesService.findMany(
-        Number(userId),
-        undefined,
-        Number(phrases_num),
-      );
-    }
-    if (page_num) {
-      return await this.userphrasesService.findMany(
-        Number(userId),
-        Number(page_num),
-        undefined,
-      );
-    }
+    return await this.userphrasesService.findMany(
+      Number(userId),
+      params?.category,
+    );
   }
 }

@@ -40,17 +40,28 @@ export class UserphrasesService {
     });
   }
 
-  async findMany(
-    userId: number,
-    pageNum: number = 0,
-    userPhrasesNum: number = 6,
-  ) {
-    const startAt = userPhrasesNum * pageNum;
+  async findMany(userId: number, category: string | undefined) {
+    if (!category) {
+      return await this.prismaService.userPhrase.findMany({
+        where: { userId },
+        include: {
+          user: {
+            select: { username: true },
+          },
+          phrase: true,
+        },
+      });
+    }
     return await this.prismaService.userPhrase.findMany({
-      take: userPhrasesNum,
-      skip: startAt,
       where: {
-        userId,
+        AND: [
+          { userId },
+          {
+            phrase: {
+              category,
+            },
+          },
+        ],
       },
       include: {
         user: {
