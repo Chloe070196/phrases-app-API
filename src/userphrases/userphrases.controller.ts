@@ -11,11 +11,19 @@ import {
 } from '@nestjs/common';
 import { UserphrasesService } from './userphrases.service';
 import { Prisma, Status } from '@prisma/client';
+import { UserPhrase } from 'docs/entities';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('userphrases')
 export class UserphrasesController {
   constructor(private userphrasesService: UserphrasesService) {}
 
+  @ApiOperation({ summary: 'create a userphrase' })
+  @ApiResponse({
+    status: 201,
+    description: 'the created userphrase',
+    type: UserPhrase,
+  })
   @HttpCode(HttpStatus.OK)
   @Post('/')
   async save(
@@ -41,6 +49,12 @@ export class UserphrasesController {
     );
   }
 
+  @ApiOperation({ summary: 'updates a userphrase' })
+  @ApiResponse({
+    status: 201,
+    description: 'the updated userphrase',
+    type: UserPhrase,
+  })
   @HttpCode(HttpStatus.OK)
   @Patch('/:id')
   async update(
@@ -54,6 +68,15 @@ export class UserphrasesController {
     });
   }
 
+  @ApiOperation({
+    summary: 'takes a userId, gets the userphrases for a given user',
+  })
+  @ApiResponse({
+    status: 201,
+    description:
+      'the list userphrases that match the userId (phrases included)',
+    type: [UserPhrase],
+  })
   @HttpCode(HttpStatus.OK)
   @Get('/:userId')
   async getMany(

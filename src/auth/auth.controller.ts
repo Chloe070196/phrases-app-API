@@ -10,6 +10,8 @@ import { AuthService } from './auth.service';
 import { UsersService } from 'src/users/users.service';
 import { Response } from 'express';
 import { Prisma } from '@prisma/client';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { LoggedInUser, Username } from 'docs/entities';
 
 @Controller()
 export class AuthController {
@@ -18,6 +20,12 @@ export class AuthController {
     private authService: AuthService,
   ) {}
 
+  @ApiOperation({ summary: 'creates (registers) a new user' })
+  @ApiResponse({
+    status: 201,
+    description: 'the username of the created user',
+    type: Username,
+  })
   @Post('register')
   async register(
     @Body()
@@ -33,6 +41,12 @@ export class AuthController {
     return res;
   }
 
+  @ApiOperation({ summary: 'logs in a user' })
+  @ApiResponse({
+    status: 201,
+    description: 'the username and id of the user, and a jwt',
+    type: LoggedInUser,
+  })
   @Post('login')
   async login(
     @Body()
