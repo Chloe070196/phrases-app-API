@@ -8,16 +8,14 @@ describe('TextsController', () => {
   let prismaService: PrismaService;
 
   const mockTextInput = {
-    title: 'test one',
     content:
       'Et dolores quia a quia iusto sit atque Quis et possimus laudantium est nemo aperiam quo recusandae necessitatibus ut laboriosam modi. Ut eaque consequatur ut rerum magni est suscipit voluptatum hic perspiciatis placeat non blanditiis molestiae. Et esse exercitationem et perspiciatis quia est consectetur necessitatibus non necessitatibus odit qui atque maiores ea voluptas quia. Non perspiciatis nisi est quam repellat et nesciunt earum.',
-    userPhrasesId: [1],
+    userphrasesId: [1],
     userId: 1,
   };
 
   const mockTextReturnedValue = {
     id: 1,
-    title: 'test one',
     content:
       'Et dolores quia a quia iusto sit atque Quis et possimus laudantium est nemo aperiam quo recusandae necessitatibus ut laboriosam modi. Ut eaque consequatur ut rerum magni est suscipit voluptatum hic perspiciatis placeat non blanditiis molestiae. Et esse exercitationem et perspiciatis quia est consectetur necessitatibus non necessitatibus odit qui atque maiores ea voluptas quia. Non perspiciatis nisi est quam repellat et nesciunt earum.',
     userPhrases: [
