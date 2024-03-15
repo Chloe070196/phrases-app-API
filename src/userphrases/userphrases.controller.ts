@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { UserphrasesService } from './userphrases.service';
 import { Prisma, Status } from '@prisma/client';
-import { UserPhrase } from 'src/entities';
+import { UserPhrase } from '../entities';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('userphrases')

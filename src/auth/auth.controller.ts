@@ -11,7 +11,7 @@ import { UsersService } from 'src/users/users.service';
 import { Response } from 'express';
 import { Prisma } from '@prisma/client';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { LoggedInUser, Username } from 'src/entities';
+import { LoggedInUser, Username } from '../entities';
 
 @Controller()
 export class AuthController {
