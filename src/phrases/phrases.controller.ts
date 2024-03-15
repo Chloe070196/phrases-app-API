@@ -13,7 +13,7 @@ import { PhrasesService } from './phrases.service';
 import { Prisma } from '@prisma/client';
 import * as jwt from 'jsonwebtoken';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Category, Phrase } from 'docs/entities';
+import { Category, Phrase } from 'src/entities';
 
 @ApiTags('phrases')
 @Controller('phrases')
