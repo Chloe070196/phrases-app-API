@@ -14,7 +14,7 @@ async function bootstrap() {
     .addTag('phrases')
     .build();
   const corsOptions: CorsOptions = {
-    origin: ['http://localhost:5173/'],
+    origin: ['english-phrases-learning-app.vercel.app'],
   };
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
