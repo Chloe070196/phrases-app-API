@@ -69,6 +69,10 @@ export class AuthController {
           secret,
         );
         res.status(201).json(response);
+        res.header(
+          'Access-Control-Allow-Origin',
+          'https://english-phrases-learning-app.vercel.app/',
+        );
         return res;
       } catch (e) {
         throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
