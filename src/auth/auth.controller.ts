@@ -39,7 +39,7 @@ export class AuthController {
     const newUser = { username: response?.username };
     res.header(
       'Access-Controll-Allow-Origin',
-      'https://english-phrases-learning-app.vercel.app/',
+      'https://english-phrases-learning-app.vercel.app',
     );
     res.status(201).json(newUser);
     return res;
@@ -68,11 +68,11 @@ export class AuthController {
           loginDto.password,
           secret,
         );
-        res.status(201).json(response);
         res.header(
           'Access-Control-Allow-Origin',
-          'https://english-phrases-learning-app.vercel.app/',
+          'https://english-phrases-learning-app.vercel.app',
         );
+        res.status(201).json(response);
         return res;
       } catch (e) {
         throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
