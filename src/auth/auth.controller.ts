@@ -37,10 +37,6 @@ export class AuthController {
       password: await AuthService.hashPassword(createUserDto.password),
     });
     const newUser = { username: response?.username };
-    res.header(
-      'Access-Controll-Allow-Origin',
-      'https://english-phrases-learning-app.vercel.app',
-    );
     res.status(201).json(newUser);
     return res;
   }
@@ -67,10 +63,6 @@ export class AuthController {
           loginDto.email,
           loginDto.password,
           secret,
-        );
-        res.header(
-          'Access-Control-Allow-Origin',
-          'https://english-phrases-learning-app.vercel.app',
         );
         res.status(201).json(response);
         return res;

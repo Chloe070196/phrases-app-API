@@ -15,6 +15,9 @@ async function bootstrap() {
     .build();
   const corsOptions: CorsOptions = {
     origin: 'https://english-phrases-learning-app.vercel.app',
+    methods: 'GET,POST',
+    allowedHeaders: 'Content-Type,Authorization',
+    optionsSuccessStatus: 200,
   };
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
