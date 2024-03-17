@@ -15,7 +15,7 @@ async function bootstrap() {
     .build();
   const corsOptions: CorsOptions = {
     origin: 'https://english-phrases-learning-app.vercel.app',
-    methods: 'GET,POST',
+    methods: 'GET,POST,OPTIONS',
     allowedHeaders: 'Content-Type,Authorization',
     optionsSuccessStatus: 200,
   };
