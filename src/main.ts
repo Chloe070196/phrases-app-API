@@ -19,6 +19,7 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type,Authorization',
     optionsSuccessStatus: 200,
     preflightContinue: false,
+    credentials: true,
   };
   app.enableCors(corsOptions);
   const document = SwaggerModule.createDocument(app, config);
