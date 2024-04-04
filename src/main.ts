@@ -14,7 +14,7 @@ async function bootstrap() {
     .addTag('phrases')
     .build();
   const corsOptions: CorsOptions = {
-    origin: 'https://english-phrases-learning-app.vercel.app',
+    origin: '*',
     methods: 'GET,POST,OPTIONS',
     allowedHeaders: 'Content-Type,Authorization',
     optionsSuccessStatus: 200,
