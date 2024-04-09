@@ -56,7 +56,6 @@ export class AuthController {
     },
     @Res() res: Response,
   ) {
-    console.log('logIn route reached / login function ran (in controller)');
     const secret = process.env.JWT_SECRET;
     if (secret) {
       try {
